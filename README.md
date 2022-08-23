@@ -1,8 +1,14 @@
 # cier
 > CIER is a Virus-Scanner, which works in a way, that it scans .java files/java projects for actual sequences, that are only used in backdoors
 
-### why is there a "backdoor" folder?
-> Dont worry it is just an example malware, CIER can be tested on
+CIER compact showcase:<br>
+<img src="./showcase.png">
+
+### is it safe?
+Yes, if you dont believe me, you can search the code yourself, or someone can search the code for you
+
+### is it free?
+Yes lol, why else would it be on github?
 
 ### how do i use it?
 
