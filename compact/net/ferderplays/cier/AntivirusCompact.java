@@ -110,6 +110,7 @@ public class AntivirusCompact {
                 }
                 linecount++;
             }
+            break;
         }
     }
 }

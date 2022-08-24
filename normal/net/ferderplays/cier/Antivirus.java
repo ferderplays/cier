@@ -153,10 +153,9 @@ public class Antivirus {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-
+                    break;
                 }
             }
-
         });
     }
 }
