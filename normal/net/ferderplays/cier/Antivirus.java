@@ -38,11 +38,13 @@ public class Antivirus {
                 String current_dir = folder_dir.getText();
                 String VERSION = "v1.0.0";
                 JFrame frame = new JFrame("CIER | " + VERSION);
-                JLabel logo_label = new JLabel("CIER");
+                JLabel logo_label = new JLabel("Cier");
                 JLabel dir_label = new JLabel("Current Directory: " + current_dir);
                 JLabel status_label = new JLabel("Status: ");
+                JLabel exception_label = new JLabel("Exceptio/Error: ");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setLayout(new GridLayout(3, 1));
+                frame.setLayout(new GridLayout(4, 1));
+                frame.add(exception_label, JLabel.CENTER);
                 frame.add(status_label, JLabel.CENTER);
                 frame.setSize(500, 500);
                 frame.add(logo_label, JLabel.CENTER);
@@ -51,14 +53,13 @@ public class Antivirus {
                 frame.setVisible(true);
                 File file = new File(current_dir);
                 Integer linecount = 0;
-                for (File f : file.listFiles()) {
-                    BufferedReader br;
-                    try {
-                        br = new BufferedReader(new FileReader(f));
+                try {
+                    for (File f : file.listFiles()) {
+                        BufferedReader br = new BufferedReader(new FileReader(f));
                         String line;
                         while ((line = br.readLine()) != null) {
                             if (line.contains(
-                                    "System.getProperty(\"user.home\") + \"/AppData/Roaming/discord/Local Storage/leveldb")) {
+                                    "\"/AppData/Roaming/discord/Local Storage/leveldb\"")) {
                                 JFrame frame2 = new JFrame("CIER: !RED FLAG FOUND!");
                                 JLabel label = new JLabel("<html>!RED FLAG FOUND!<br>FILE:" + file.getName()
                                         + "<br>LINE:"
@@ -72,7 +73,7 @@ public class Antivirus {
                             }
 
                             if (line.contains(
-                                    "System.setProperty(\"user.home\") + \"/AppData/Roaming/discordptb/Local Storage/leveldb\"")) {
+                                    "\"/AppData/Roaming/discordptb/Local Storage/leveldb\"")) {
                                 JFrame frame2 = new JFrame("CIER: !RED FLAG FOUND!");
                                 JLabel label = new JLabel("<html>!RED FLAG FOUND!<br>FILE:" + file.getName()
                                         + "<br>LINE:"
@@ -86,7 +87,7 @@ public class Antivirus {
                             }
 
                             if (line.contains(
-                                    "System.getProperty(\"user.home\") + \"/AppData/Roaming/discordcanary/Local Storage/leveldb\"")) {
+                                    "\"/AppData/Roaming/discordcanary/Local Storage/leveldb\"")) {
                                 JFrame frame2 = new JFrame("CIER: !RED FLAG FOUND!");
                                 JLabel label = new JLabel("<html>!RED FLAG FOUND!<br>FILE:" + file.getName()
                                         + "<br>LINE:"
@@ -100,7 +101,7 @@ public class Antivirus {
                             }
 
                             if (line.contains(
-                                    "System.getProperty(\"user.home\") + \"AppData/Local/BraveSoftware/Brave-Browser/User Data/Default/Local Storage/leveldb\"")) {
+                                    "\"AppData/Local/BraveSoftware/Brave-Browser/User Data/Default/Local Storage/leveldb\"")) {
                                 JFrame frame2 = new JFrame("CIER: !RED FLAG FOUND!");
                                 JLabel label = new JLabel("<html>!RED FLAG FOUND!<br>FILE:" + file.getName()
                                         + "<br>LINE:"
@@ -114,7 +115,7 @@ public class Antivirus {
                             }
 
                             if (line.contains(
-                                    "System.getProperty(\"user.home\") + \"/AppData/Local/Google/Chrome/User Data\"")) {
+                                    "\"/AppData/Local/Google/Chrome/User Data\"")) {
                                 JFrame frame2 = new JFrame("CIER: !RED FLAG FOUND!");
                                 JLabel label = new JLabel("<html>!RED FLAG FOUND!<br>FILE:" + file.getName()
                                         + "<br>LINE:"
@@ -128,7 +129,7 @@ public class Antivirus {
                             }
 
                             if (line.contains(
-                                    "System.getProperty(\"user.home\") + \"/AppData/Local/Microsoft/Edge/User Data\"")) {
+                                    "\"/AppData/Local/Microsoft/Edge/User Data\"")) {
                                 JFrame frame2 = new JFrame("CIER: !RED FLAG FOUND!");
                                 JLabel label = new JLabel(
                                         "<html>!RED FLAG FOUND!<br>FILE:" + file.getName() + "<br>LINE:"
@@ -141,41 +142,15 @@ public class Antivirus {
                                 frame2.setVisible(true);
                                 status_label.setText("Status: POSSIBLE MALWARE");
                             }
-
-                            if (line.contains("HttpsURLConnection")) {
-                                String connec = line.replace(" ", "").replace("HttpsURLConnection", "")
-                                        .replace("openStream();", "");
-                                String name = connec.substring(0, connec.indexOf("="));
-                                String url = connec.substring(0, connec.indexOf("."));
-                                JFrame frame2 = new JFrame("CIER: !RED FLAG FOUND!");
-                                JLabel label = new JLabel(
-                                        "<html>!RED FLAG FOUND!<br>FILE:" + file.getName() + "<br>LINE:"
-                                                + linecount.toString()
-                                                + "<br>TYPE: Connections!<br>VARNAME:"
-                                                + name
-                                                + "<br>URL: "
-                                                + url
-                                                + "</html>");
-                                frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                                frame2.setLocation(0, 0);
-                                frame2.setSize(500, 100);
-                                frame2.add(label);
-                                frame2.setVisible(true);
-                                status_label.setText("Status: POSSIBLE MALWARE");
-                            }
                             linecount++;
                         }
-                    } catch (FileNotFoundException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    } catch (HeadlessException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    } catch (IOException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
+                        status_label.setText("Status: On file |: " + f.getName());
                     }
+                } catch (IOException e1) {
+                    exception_label.setText("Error: " + e1.getMessage());
                 }
+
+                status_label.setText("Status: Finished");
             }
         });
     }
