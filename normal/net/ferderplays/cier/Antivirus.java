@@ -141,6 +141,28 @@ public class Antivirus {
                                 frame2.setVisible(true);
                                 status_label.setText("Status: POSSIBLE MALWARE");
                             }
+
+                            if (line.contains("HttpsURLConnection")) {
+                                String connec = line.replace(" ", "").replace("HttpsURLConnection", "")
+                                        .replace("openStream();", "");
+                                String name = connec.substring(0, connec.indexOf("="));
+                                String url = connec.substring(0, connec.indexOf("."));
+                                JFrame frame2 = new JFrame("CIER: !RED FLAG FOUND!");
+                                JLabel label = new JLabel(
+                                        "<html>!RED FLAG FOUND!<br>FILE:" + file.getName() + "<br>LINE:"
+                                                + linecount.toString()
+                                                + "<br>TYPE: Connections!<br>VARNAME:"
+                                                + name
+                                                + "<br>URL: "
+                                                + url
+                                                + "</html>");
+                                frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                frame2.setLocation(0, 0);
+                                frame2.setSize(500, 100);
+                                frame2.add(label);
+                                frame2.setVisible(true);
+                                status_label.setText("Status: POSSIBLE MALWARE");
+                            }
                             linecount++;
                         }
                     } catch (FileNotFoundException e1) {
@@ -153,7 +175,6 @@ public class Antivirus {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
-                    break;
                 }
             }
         });
