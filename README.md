@@ -1,6 +1,7 @@
 # cier
 <img src="https://img.ferder.repl.co/cier/logo.svg"><br>
 <img src="https://img.shields.io/github/downloads/ferderplays/cier/total?color=white&style=for-the-badge"> | <a href="https://discord.gg/TPaThS5qsB"><img src="https://img.shields.io/discord/856898680601706536.svg?color=white&style=for-the-badge"></a> | <img src="https://img.shields.io/github/repo-size/ferderplays/cier?color=white&style=for-the-badge"> | <img  src="https://img.shields.io/tokei/lines/github/ferderplays/cier?color=white&label=lines%20of%20code&style=for-the-badge">
+=====
 > CIER is a Virus-Scanner, which works in a way, that it scans .java files/java projects for actual sequences, that are only used in backdoors
 
 CIER compact showcase:<br>
